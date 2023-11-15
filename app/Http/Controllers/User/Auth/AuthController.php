@@ -6,17 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function __invoke(AuthRequest $request)
-    {
-        return $this->auth($request);
-    }
-
     public function auth(AuthRequest $request)
     {
         try {
