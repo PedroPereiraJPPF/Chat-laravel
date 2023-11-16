@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -31,6 +32,17 @@ class AuthController extends Controller
             }
 
             return response()->json(["message" => "success", 'token' => $user->createToken($request['email'])->plainTextToken]);
+        } catch (\Throwable $th) {
+            return response()->json(["message" => $th->getMessage(), "data" => ""], 500);
+        }
+    }
+
+    public function logout()
+    {
+        try {
+            Auth::user()->tokens()->delete();
+
+            return response()->json(["message" => "success"]);
         } catch (\Throwable $th) {
             return response()->json(["message" => $th->getMessage(), "data" => ""], 500);
         }
