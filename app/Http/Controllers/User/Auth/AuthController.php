@@ -21,15 +21,13 @@ class AuthController extends Controller
 
             $user = User::where('email', $request['email'])->first();
 
-            if (!$user->tokens->isEmpty()) {
-                return response()->json(["message" => "success", 'token' => $user->tokens()->first()->token], 200);
-            }
-
             if (!$user || !Hash::check($request['password'], $user->password)) {
                 throw ValidationException::withMessages([
                     "message" => "invalid credentials"
                 ]);
             }
+
+            $user->tokens()->delete();
 
             return response()->json(["message" => "success", 'token' => $user->createToken($request['email'])->plainTextToken]);
         } catch (\Throwable $th) {
