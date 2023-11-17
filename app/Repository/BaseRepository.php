@@ -22,6 +22,11 @@ class BaseRepository implements BaseRepositoryInterface
         $this->model = $model;
     }
 
+    public function getAll($paginate = 15)
+    {
+        return $this->model->paginate($paginate);
+    }
+
     /**
     * @param array $attributes
     *
