@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Chat\ConversationController;
 use App\Http\Controllers\Chat\MessageController;
 use App\Http\Controllers\User\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -12,5 +13,6 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::apiResource('/messages', MessageController::class)->middleware('auth:sanctum');
+    Route::apiResource('/conversation', ConversationController::class)->middleware('auth:sanctum');
 });
 
