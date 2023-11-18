@@ -24,7 +24,7 @@ class MessageStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_conversation' => 'required',
+            'conversation_id' => 'required',
             'content' => 'required'
         ];
     }

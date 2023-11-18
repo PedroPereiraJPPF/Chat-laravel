@@ -18,11 +18,11 @@ class MessageController extends Controller
     {
         try {
             $request->validate([
-                'id_conversation' => 'required'
+                'conversation_id' => 'required'
             ]);
 
             $per_page = $request->per_page ?? 15;
-            return response()->json(['message' => 'success', 'data' => $this->messageService->getAllByConversation($request->id_conversation, $per_page)]);
+            return response()->json(['message' => 'success', 'data' => $this->messageService->getAllByConversation($request->conversation_id, $per_page)]);
         } catch (\Throwable $th) {
             return response()->json(['message' => $th->getMessage(), 'data' => ''], 500);
         }
@@ -32,11 +32,11 @@ class MessageController extends Controller
     {
         try {
             $request = $request->only(
-                'id_conversation',
+                'conversation_id',
                 'content'
             );
 
-            $request['id_sender'] = Auth::user()->id;
+            $request['user_id'] = Auth::user()->id;
             $message = $this->messageService->insert($request);
             return response()->json(['message' => 'success', 'data' => $message], 200);
         } catch (\Throwable $th) {

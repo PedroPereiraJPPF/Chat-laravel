@@ -14,6 +14,6 @@ class MessageRepository extends BaseRepository
 
     public function getMessagesByConversation(mixed $conversationId, $per_page = 15)
     {
-        return $this->model->where('id_conversation', $conversationId)->paginate($per_page);
+        return $this->model->where('conversation_id', $conversationId)->paginate($per_page);
     }
 }

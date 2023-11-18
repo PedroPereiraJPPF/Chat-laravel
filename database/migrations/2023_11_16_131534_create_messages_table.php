@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_conversation');
-            $table->unsignedBigInteger('id_sender');
+            $table->unsignedBigInteger('conversation_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('content');
             $table->timestamps();
 
-            $table->foreign('id_conversation')->references('id')->on('conversations')->onDelete('cascade');
-            $table->foreign('id_sender')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('conversation_id')->references('id')->on('conversations')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

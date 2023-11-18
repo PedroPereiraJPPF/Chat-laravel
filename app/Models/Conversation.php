@@ -14,8 +14,8 @@ class Conversation extends Model
         'status'
     ];
 
-    public function users_id()
+    public function users()
     {
-        return $this->hasMany('users_conversations');
+        return $this->belongsToMany(User::class, 'users_conversations');
     }
 }

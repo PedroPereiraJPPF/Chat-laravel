@@ -11,18 +11,18 @@ class Message extends Model
 
     protected $fillable = [
         'id',
-        'id_conversation',
-        'id_sender',
+        'conversation_id',
+        'user_id',
         'content'
     ];
 
     public function sender()
     {
-        return $this->belongsTo('users', 'id', 'id_sender');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function conversation()
     {
-        return $this->belongsTo('conversations', 'id', 'id_conversation');
+        return $this->belongsTo(Conversation::class, 'conversation_id', 'id');
     }
 }

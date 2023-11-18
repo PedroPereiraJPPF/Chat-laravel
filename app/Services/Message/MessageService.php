@@ -37,7 +37,7 @@ class MessageService
     public function insert(array $data)
     {
         try {
-            $this->repository->create($data);
+            return $this->repository->create($data);
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -52,7 +52,7 @@ class MessageService
                 throw MessageNotFoundException::make();
             }
 
-            if ($user->id !== $message->id_sender) {
+            if ($user->id != $message->user_id) {
                 throw UserCanNotEditMessageException::make($user);
             }
 
