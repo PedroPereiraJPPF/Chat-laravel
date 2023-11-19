@@ -75,6 +75,8 @@ class ConversationService
 
             DB::commit();
             return $this->conversationRepository->update($conversation, $data);
+        } catch (ModelNotFoundException $e) {
+            throw UserNotFoundException::make(current($e->getIds()));
         } catch (\Throwable $th) {
             DB::rollBack();
             info($th);
