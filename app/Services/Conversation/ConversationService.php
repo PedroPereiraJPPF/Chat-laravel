@@ -17,7 +17,7 @@ class ConversationService
     public function listConversationByUser(int $per_page = 5)
     {
         try {
-            return $this->conversationRepository->getConversationsByUserId(Auth::user(), ['users'], $per_page);
+            return $this->conversationRepository->getConversationsByUserId(Auth::user(), ['users:id'], $per_page);
         } catch (\Throwable $th) {
             throw $th;
         }
