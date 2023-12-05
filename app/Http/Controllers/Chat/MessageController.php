@@ -22,6 +22,7 @@ class MessageController extends Controller
             ]);
 
             $per_page = $request->per_page ?? 15;
+
             return response()->json(['message' => 'success', 'data' => $this->messageService->getAllByConversation($request->conversation_id, $per_page)]);
         } catch (\Throwable $th) {
             return response()->json(['message' => $th->getMessage(), 'data' => ''], 500);
